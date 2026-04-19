@@ -1,0 +1,22 @@
+{
+  "deploy": {
+    "cronJobs": [
+      {
+        "schedule": "0 9 * * 1",
+        "command": "curl https://nex.bbuilds.dev/api/cron/monday"
+      },
+      {
+        "schedule": "0 8 * * 2-4",
+        "command": "curl https://nex.bbuilds.dev/api/cron/standup"
+      },
+      {
+        "schedule": "0 16 * * 5",
+        "command": "curl https://nex.bbuilds.dev/api/cron/friday"
+      },
+      {
+        "schedule": "0 19 * * 0",
+        "command": "curl https://nex.bbuilds.dev/api/cron/buffer-check"
+      }
+    ]
+  }
+}
