@@ -54,14 +54,13 @@ export function formatSprintPlanForNotification(plan: {
     const repoName = repo.split('/')[1];
     lines.push(`*${repoName}* (${issues.length})`);
 
-    issues.slice(0, 3).forEach(issue => {
+    issues.slice(0, issues.length).forEach(issue => {
       const emoji = issue.labels.find(l => PRIORITY_EMOJI[l])
         ? PRIORITY_EMOJI[issue.labels.find(l => PRIORITY_EMOJI[l])!]
         : '⚪';
       lines.push(`  ${emoji} ${issue.title.slice(0, 60)}`);
     });
-
-    if (issues.length > 3) lines.push(`  ... +${issues.length - 3} more`);
+    
     lines.push('');
   }
 
