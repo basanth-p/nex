@@ -1,25 +1,21 @@
 import { NextResponse } from 'next/server';
 import { buildDaySchedule } from '@/lib/sprint/scheduler';
 import { generateStandupDraft } from '@/lib/sprint/standup';
-import { sendTelegramMessage } from '@/lib/notifications/telegram';
+import { sendNotification } from '@/lib/notifications/ntfy';
+
+function formatDayScheduleMessage(schedule: object[] | null, standup: string): string {
+  const dateStr = new Date().toDateString();
+  return `📋 *Nex Day Plan — ${dateStr}*\n\n${standup || 'No standup draft yet.'}\n\n_${schedule?.length ?? 0} tasks scheduled for today._`;
+}
 
 export async function GET() {
   const today = new Date();
-  const dayOfWeek = today.getDay(); // 0=Sun, 1=Mon ... 6=Sat
-
-  // Only run Tue-Thu
+  const dayOfWeek = today.getDay();
   if (dayOfWeek < 2 || dayOfWeek > 4) {
     return NextResponse.json({ skipped: true });
   }
-
-  // 1. Build today's schedule
   const schedule = await buildDaySchedule(today);
-
-  // 2. Generate standup draft (what you did yesterday, what's today)
   const standup = await generateStandupDraft();
-
-  // 3. Send to Telegram
-  await sendTelegramMessage(formatDayScheduleMessage(schedule, standup));
-
+  await sendNotification(formatDayScheduleMessage(schedule, standup));
   return NextResponse.json({ success: true });
 }

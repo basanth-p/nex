@@ -1,9 +1,9 @@
 import { NextResponse } from 'next/server';
 import { generateSprintDemoDigest } from '@/lib/sprint/demo';
-import { sendTelegramMessage } from '@/lib/notifications/telegram';
+import { sendNotification } from '@/lib/notifications/ntfy';
 
 export async function GET() {
   const digest = await generateSprintDemoDigest();
-  await sendTelegramMessage(digest);
+  await sendNotification(digest);
   return NextResponse.json({ success: true });
 }

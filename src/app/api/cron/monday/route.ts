@@ -1,17 +1,15 @@
 import { NextResponse } from 'next/server';
 import { syncAllIssuesFromGitHub } from '@/lib/github/sync';
 import { buildSprintPlan } from '@/lib/sprint/planner';
-import { sendTelegramMessage } from '@/lib/notifications/telegram';
+import { sendNotification } from '@/lib/notifications/ntfy';
+
+function formatSprintPlanMessage(plan: object): string {
+  return `🗓️ *Nex Sprint Plan — Week Starting ${new Date().toDateString()}*\n\n_Sprint planning sync complete. Issues loaded across all projects._`;
+}
 
 export async function GET() {
-  // 1. Sync all issues from GitHub across all registered repos
   await syncAllIssuesFromGitHub();
-
-  // 2. Create a new sprint for this week
   const sprintPlan = await buildSprintPlan();
-
-  // 3. Notify
-  await sendTelegramMessage(formatSprintPlanMessage(sprintPlan));
-
+  await sendNotification(formatSprintPlanMessage(sprintPlan));
   return NextResponse.json({ success: true });
 }
