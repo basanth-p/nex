@@ -1,4 +1,4 @@
-const NTFY_BASE_URL = 'https://ntfy.sh'\;
+const NTFY_BASE_URL = 'https://ntfy.sh';
 
 interface NtfyOptions {
   title?: string;
