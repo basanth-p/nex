@@ -17,7 +17,7 @@ const REPO_CONFIG: { repo: string; owner: string; pat: string }[] = [
 */  
   {
     owner: 'Basanth-Builds', // replace with actual username/org
-    repo: 'court-iq-qpi',
+    repo: 'court-iq-api',
     pat: process.env.GITHUB_PAT_BASANTHBUILDS!
   },
   {
