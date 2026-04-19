@@ -4,31 +4,34 @@ import { scoreIssue } from '@/lib/sprint/scorer';
 
 // Repo → PAT mapping
 const REPO_CONFIG: { repo: string; owner: string; pat: string }[] = [
-  {
-    owner: 'squaredsplit-org',      // replace with actual org name
+/*  {
+    owner: 'SquaredSplit-v1',      // replace with actual org name
     repo: 'squaredSplitApp',
     pat: process.env.GITHUB_PAT_SQUAREDSPLIT!
   },
   {
-    owner: 'sahayak-org',           // replace with actual org name
-    repo: 'Sahayak-AI',
+    owner: 'sahayakunovative-ai',           // replace with actual org name
+    repo: 'Sahayak',
     pat: process.env.GITHUB_PAT_SAHAYAK!
   },
+*/  
   {
-    owner: 'your-personal-username', // replace with actual username/org
+    owner: 'Basanth-Builds', // replace with actual username/org
     repo: 'court-iq-qpi',
-    pat: process.env.GITHUB_PAT_PERSONAL!
+    pat: process.env.GITHUB_PAT_BASANTHBUILDS!
   },
   {
-    owner: 'your-personal-username',
+    owner: 'Basanth-Builds',
     repo: 'courtiq',
-    pat: process.env.GITHUB_PAT_PERSONAL!
+    pat: process.env.GITHUB_PAT_BASANTHBUILDS!
   },
+/*  
   {
-    owner: 'your-personal-username',
+    owner: 'nirmalamin24bak',
     repo: 'finora-app',
-    pat: process.env.GITHUB_PAT_PERSONAL!
+    pat: process.env.GITHUB_PAT_FINORA!
   },
+*/  
 ];
 
 export async function syncAllIssuesFromGitHub(): Promise<void> {
